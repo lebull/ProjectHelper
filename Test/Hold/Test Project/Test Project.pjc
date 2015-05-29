@@ -1,0 +1,15 @@
+{
+    "status": "Hold", 
+    "change_description": "", 
+    "name": "Test Project", 
+    "production_date": null, 
+    "questions": [], 
+    "functional_counterpart": "", 
+    "inventory_code": "10150", 
+    "todoist_project": null, 
+    "program_name": "Test", 
+    "transports": [], 
+    "other_attributes": {
+        "color": "green"
+    }
+}
