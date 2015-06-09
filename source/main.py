@@ -6,7 +6,7 @@ Created on May 27, 2015
 
 from kivy.app import App
 from kivy.lang import Builder
-from kivy.uix.widget import Widget
+# from kivy.uix.widget import Widget
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.listview import ListView, ListItemButton
@@ -15,7 +15,7 @@ from kivy.uix.label import Label
 
 from kivy.properties import ObjectProperty, ListProperty, StringProperty
 
-from kivy.uix.splitter import Splitter
+# from kivy.uix.splitter import Splitter
 
 from project.project import Project, ProjectFactory
 from project.settings import Settings
@@ -73,21 +73,21 @@ Builder.load_string("""
 
 
 class ProjectDetail(GridLayout):
-    
+
     project = ObjectProperty()
-    
+
     def __init__(self, **kwargs):
         kwargs['cols'] = 2
         super(ProjectDetail, self).__init__(**kwargs)
-        self.bind(project = self.redraw)
-        
+        self.bind(project=self.redraw)
+
     def redraw(self, *args):
         self.clear_widgets()
-        
+
         if self.project:
-            self.add_widget(Label(text="Name", halign = 'right'))
+            self.add_widget(Label(text="Name", halign='right'))
             self.add_widget(Label(text=self.project.name))
-            
+
             for attr_key, attr_value in self.project.__dict__.iteritems():
                 self.add_widget(Label(text=str(attr_key), halign='right'))
                 self.add_widget(Label(text=str(attr_value)))
@@ -96,18 +96,20 @@ class ProjectDetail(GridLayout):
         self.project = project
         self.redraw()
 
+
 class ProjectsList(ListView):
-    
+
     project_list = ListProperty([])
-    
+
     def __init__(self, **kwargs):
-            self.refreshData()
-            super(ProjectsList, self).__init__(adapter=self.adapter, **kwargs)
-            self.adapter.bind(on_selection_change = self._onSelectItem)
+        self.refreshData()
+        super(ProjectsList, self).__init__(adapter=self.adapter, **kwargs)
+        self.adapter.bind(on_selection_change=self._onSelectItem)
 
     def refreshData(self):
 
-        self.project_list = ProjectFactory.getProjectsInPath(Settings.PROJECT_DIRECTORY)
+        self.project_list = ProjectFactory.getProjectsInPath(
+            Settings.PROJECT_DIRECTORY)
 
         args_converter = lambda row_index, project: {'text': project.name,
                                                      'size_hint_y': None,
@@ -126,14 +128,16 @@ class ProjectsList(ListView):
 
         self.parent.parent.parent.parent.ids.project_detail.update(project)
 
-        #print App.get_running_app().root.ids['main_screen'].ids['project_list'].ids['project_detail_splitter'].ids['project_detail'].update(project)
+        # print
+        # App.get_running_app().root.ids['main_screen'].ids['project_list'].ids['project_detail_splitter'].ids['project_detail'].update(project)
 
-        
+
 class RootScreen(BoxLayout):
     pass
 
 
 class ProjectHelperApp(App):
+
     def build(self):
         return RootScreen()
 

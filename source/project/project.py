@@ -10,7 +10,9 @@ import fnmatch
 
 from settings import Settings
 
+
 class Project(object):
+
     '''classdocs
     '''
 
@@ -98,13 +100,30 @@ class Project(object):
         return json.dumps(self.__dict__,
                           default=lambda o: o.__dict__,
                           indent=4)
+
     def getRST(self):
         return_string = ""
+
+        # Title
+        return_string += self.name + '\n' + '=' * len(self.name) + '\n'
+
         for key, value in self.__dict__.iteritems():
-            return_string += "\n -{} {}".format(key, value) 
+
+            if value is None or len(value) == 0:
+                continue
+
+            key = str(key).capitalize().replace('_', ' ')
+
+            if isinstance(value, dict):
+                value = "\n\t".join(
+                    ["**{}** {}".format(sub_key, sub_value) for sub_key, sub_value in value.iteritems()])
+
+            return_string += "\n :{}: {}".format(key, value)
         return return_string
 
+
 class ProjectFactory(object):
+
     '''classdocs
     '''
 
@@ -153,7 +172,7 @@ class ProjectFactory(object):
 #     def default(self, obj):
 #         if isinstance(obj, Project):
 #             return obj.__dict__
-#         # Let the base class default method raise the TypeError
+# Let the base class default method raise the TypeError
 #         return json.JSONEncoder.default(self, obj)
 
 # TODO: JsonEncoder, JsonDecoder
@@ -168,7 +187,7 @@ if __name__ == "__main__":
 #                         program_name="Test",
 #                         inventory_code="10150",
 #                         color="green")
-# 
+#
 #     myproject.save("Active")
 #     myproject.move(to_status="Hold")
 

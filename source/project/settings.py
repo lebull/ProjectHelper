@@ -1,9 +1,9 @@
 class Settings(object):
-    #PROJECT_DIRECTORY = "C:\\Users\\TDARSEY\\Desktop\\Personal Projects\\" \
-    #                     "TodoistHelper\\Test"
+    PROJECT_DIRECTORY = "C:\\Users\\TDARSEY\\Desktop\\Personal Projects\\" \
+        "TodoistHelper\\Test"
 
-    PROJECT_DIRECTORY = "C:\\Users\\Tyler\\Desktop\\DevProjects\\" \
-    "ProjectHelper\\Test"
+    #PROJECT_DIRECTORY = "C:\\Users\\Tyler\\Desktop\\DevProjects\\" \
+    #"ProjectHelper\\Test"
 
     PROJECT_EXTENSION = ".pjc"
 
